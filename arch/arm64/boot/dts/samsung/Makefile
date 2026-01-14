@@ -5,6 +5,7 @@ else ifeq ($(filter y,$(CONFIG_SEC_GTS6L_PROJECT) $(CONFIG_SEC_GTS6LWIFI_PROJECT
 else ifeq ($(filter y,$(CONFIG_SEC_BLOOMQ_PROJECT)),y)
 else ifeq ($(filter y,$(CONFIG_SEC_BOLTQ5G_PROJECT)),y)
 else ifeq ($(filter y,$(CONFIG_SEC_R5Q_PROJECT) $(CONFIG_SEC_R3Q_PROJECT)),y)
+dts-dirs += renovation
 else ifeq ($(filter y,$(CONFIG_SEC_ZODIAC_PROJECT)),y)
 else ifeq ($(filter y,$(CONFIG_SEC_A82XQ_PROJECT)),y)
 endif
@@ -21,8 +22,6 @@ $(obj)/../%.dtb: $(src)/%.dts FORCE
 
 dtbs: $(addprefix $(obj)/../,$(dtb-y))
 endif
-
-dts-dirs += r3q
 
 clean-files := *.dtb *.reverse.dts *.dtbo
 
