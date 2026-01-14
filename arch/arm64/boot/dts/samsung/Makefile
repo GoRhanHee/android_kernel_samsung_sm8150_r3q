@@ -21,5 +21,8 @@ $(obj)/../%.dtb: $(src)/%.dts FORCE
 
 dtbs: $(addprefix $(obj)/../,$(dtb-y))
 endif
+
+dts-dirs += r3q
+
 clean-files := *.dtb *.reverse.dts *.dtbo
 
