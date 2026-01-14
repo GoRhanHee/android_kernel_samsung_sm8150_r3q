@@ -28,9 +28,9 @@ KERNEL_MAKE_ENV="DTC_EXT=${ANDROID_BUILD_TOP}/tools/dtc CONFIG_BUILD_ARM64_DT_OV
 mkdir out
 
 if [ "${KSU}" == "y" ]; then
-    CONFIGS="vendor/r3q_kor_single_defconfig vendor/gorhanhee.config vendor/kernelsu.config"
+    CONFIGS="r3q_kor_single_defconfig gorhanhee.config kernelsu.config"
 elif [ "${KSU}" == "n" ]; then
-    CONFIGS="vendor/r3q_kor_single_defconfig vendor/gorhanhee.config"
+    CONFIGS="r3q_kor_single_defconfig gorhanhee.config"
 else
     echo "Write KernelSU Option ex) ./build.sh y"
     exit 1    
@@ -63,7 +63,7 @@ cd ${ANDROID_BUILD_TOP}/prebuilts
     ./magiskboot unpack boot.img
     cp ${ANDROID_BUILD_TOP}/out/arch/arm64/boot/Image ${ANDROID_BUILD_TOP}/prebuilts/kernel
     # Cooking dtb
-        cat ${ANDROID_BUILD_TOP}/out/arch/arm64/boot/dts/vendor/qcom/kona*.dtb > ${ANDROID_BUILD_TOP}/prebuilts/dtb
+        cat ${ANDROID_BUILD_TOP}/out/arch/arm64/boot/dts/qcom/*.dtb > ${ANDROID_BUILD_TOP}/prebuilts/dtb
     ./magiskboot repack boot.img
     cp ${ANDROID_BUILD_TOP}/prebuilts/new-boot.img ${ANDROID_BUILD_TOP}/prebuilts/output/boot.img
 

@@ -48,10 +48,13 @@ ofile = None
 warning_re = re.compile(r'''(.*/|)([^/]+\.[a-z]+:\d+):(\d+:)? warning:''')
 def interpret_warning(line):
     """Decode the message from gcc.  The messages we care about have a filename, and a warning"""
+    if isinstance(line, bytes):
+        line = line.decode('utf-8', 'ignore')
+
     line = line.rstrip('\n')
     m = warning_re.match(line)
     if m and m.group(2) not in allowed_warnings:
-        print >> sys.stderr, "error, forbidden warning:", m.group(2)
+        print("error, forbidden warning:", m.group(2), file=sys.stderr)
 
         # If there is a warning, remove any object if it exists.
         if ofile:
@@ -76,7 +79,7 @@ def run_gcc():
     try:
         proc = subprocess.Popen(args, stderr=subprocess.PIPE)
         for line in proc.stderr:
-            print >> sys.stderr, line,
+            print(line, file=sys.stderr)
             interpret_warning(line)
 
         result = proc.wait()
